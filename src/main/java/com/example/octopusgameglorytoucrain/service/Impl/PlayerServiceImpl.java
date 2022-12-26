@@ -24,14 +24,13 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Player save(UUID uuid) {
-        final Player player = new Player(uuid);
-        return playerRepository.save(player);
+    public Player save(final UUID uuid) {
+        return playerRepository.save(new Player(uuid));
     }
 
 
     @Override
-    public Player delete(UUID id) {
+    public Player delete(final UUID id) {
         if(playerRepository.count() == 1)
             winnerRepository.save(new Winner(id,"", LocalDate.now()));
         playerRepository.deleteById(id);
