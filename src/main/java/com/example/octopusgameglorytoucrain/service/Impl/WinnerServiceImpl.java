@@ -17,7 +17,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class WinnerServiceImpl implements WinnerService {
     private final WinnerRepository winnerRepository;
-    private final PlayerRepository playerRepository;
 
     @Override
     public List<Winner> getAll() {
