@@ -3,8 +3,10 @@ package com.example.octopusgameglorytoucrain.api.controller;
 import com.example.octopusgameglorytoucrain.entity.Player;
 import com.example.octopusgameglorytoucrain.entity.dto.PlayerDto;
 import com.example.octopusgameglorytoucrain.mapper.Mapper;
+import com.example.octopusgameglorytoucrain.mapper.PlayerMapper;
 import com.example.octopusgameglorytoucrain.service.PlayerService;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.factory.Mappers;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,16 +19,12 @@ import java.util.UUID;
 @CrossOrigin
 public class PlayerController {
     private final PlayerService playerService;
-    private final Mapper<Player, PlayerDto> playerMapper;
+    private final Mapper<Player, PlayerDto> playerMapper = Mappers.getMapper(PlayerMapper.class);
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     List<PlayerDto> getPlayers() {
-        return playerService
-                .getAll()
-                .stream()
-                .map(playerMapper::mapTo)
-                .toList();
+        return playerService.getAll().stream().map(playerMapper::mapTo).toList();
     }
 
     @PostMapping

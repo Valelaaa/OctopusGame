@@ -10,6 +10,6 @@ import java.util.UUID;
 public interface WinnerService {
     List<Winner> getAll();
 
-    public Winner create(final UUID player, final String nickname);
+    Winner create(final UUID player, final String nickname);
 
 }

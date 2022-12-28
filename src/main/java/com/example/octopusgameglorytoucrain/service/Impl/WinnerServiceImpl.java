@@ -1,9 +1,6 @@
 package com.example.octopusgameglorytoucrain.service.Impl;
 
-import com.example.octopusgameglorytoucrain.api.exceptions.PlayerNotFoundException;
-import com.example.octopusgameglorytoucrain.entity.Player;
 import com.example.octopusgameglorytoucrain.entity.Winner;
-import com.example.octopusgameglorytoucrain.repository.PlayerRepository;
 import com.example.octopusgameglorytoucrain.repository.WinnerRepository;
 import com.example.octopusgameglorytoucrain.service.WinnerService;
 import lombok.AllArgsConstructor;

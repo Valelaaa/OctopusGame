@@ -45,5 +45,4 @@ class PlayerServiceImplTest {
         assertEquals(PLAYER_LIST, destinationList);
         assertArrayEquals(PLAYER_LIST.toArray(),destinationList.toArray());
     }
-
 }
