@@ -1,6 +1,6 @@
 package com.example.octopusgameglorytoucrain.service.Impl;
 
-import com.example.octopusgameglorytoucrain.api.exceptions.PlayerNotFoundException;
+import com.example.octopusgameglorytoucrain.api.exceptionHandler.exceptions.PlayerNotFoundException;
 import com.example.octopusgameglorytoucrain.entity.Player;
 import com.example.octopusgameglorytoucrain.entity.Winner;
 import com.example.octopusgameglorytoucrain.repository.PlayerRepository;
@@ -18,6 +18,7 @@ import java.util.UUID;
 public class PlayerServiceImpl implements PlayerService {
     private final PlayerRepository playerRepository;
     private final WinnerRepository winnerRepository;
+
     @Override
     public List<Player> getAll() {
         return playerRepository.findAll();
@@ -31,8 +32,10 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player delete(final UUID id) {
-        if(playerRepository.count() == 1)
-            winnerRepository.save(new Winner(id,"", LocalDate.now()));
+        if (playerRepository.count() == 1) winnerRepository.save(new Winner(id, "", LocalDate.now()));
+
+        playerRepository.findById(id).orElseThrow(() -> new PlayerNotFoundException("Player with id "+id+" not found"));
+
         playerRepository.deleteById(id);
 
         return new Player(id);
@@ -40,10 +43,8 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player getById(final UUID player_id) {
-        return playerRepository
-                .findById(player_id)
-                .orElseThrow(
-                        () -> new PlayerNotFoundException(player_id.toString()));
+        return playerRepository.findById(player_id)
+                .orElseThrow(() -> new PlayerNotFoundException("Player with id "+player_id+" not found"));
     }
 
 }

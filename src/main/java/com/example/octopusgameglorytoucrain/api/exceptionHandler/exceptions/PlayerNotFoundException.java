@@ -1,4 +1,4 @@
-package com.example.octopusgameglorytoucrain.api.exceptions;
+package com.example.octopusgameglorytoucrain.api.exceptionHandler.exceptions;
 
 public class PlayerNotFoundException extends RuntimeException {
     public PlayerNotFoundException(String s) {
