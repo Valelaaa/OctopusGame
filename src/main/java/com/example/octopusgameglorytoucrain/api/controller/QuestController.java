@@ -20,6 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("/quests")
 @Slf4j
+@CrossOrigin
 public class QuestController {
     private final QuestService questService;
     private final Mapper<Quest, QuestDto> questMapper = Mappers.getMapper(QuestMapper.class);
