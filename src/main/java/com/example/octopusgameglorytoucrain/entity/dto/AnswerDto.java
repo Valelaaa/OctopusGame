@@ -14,6 +14,5 @@ import javax.validation.constraints.NotBlank;
 public class AnswerDto {
     @NotBlank
     private String answer;
-
     private Boolean isCorrect;
 }

@@ -2,14 +2,11 @@ package com.example.octopusgameglorytoucrain.service.Impl;
 
 import com.example.octopusgameglorytoucrain.api.exceptionHandler.exceptions.PlayerNotFoundException;
 import com.example.octopusgameglorytoucrain.entity.Player;
-import com.example.octopusgameglorytoucrain.entity.Winner;
 import com.example.octopusgameglorytoucrain.repository.PlayerRepository;
-import com.example.octopusgameglorytoucrain.repository.WinnerRepository;
 import com.example.octopusgameglorytoucrain.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +14,6 @@ import java.util.UUID;
 @Service
 public class PlayerServiceImpl implements PlayerService {
     private final PlayerRepository playerRepository;
-    private final WinnerRepository winnerRepository;
 
     @Override
     public List<Player> getAll() {
@@ -32,9 +28,8 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Override
     public Player delete(final UUID id) {
-        if (playerRepository.count() == 1) winnerRepository.save(new Winner(id, "", LocalDate.now()));
-
-        playerRepository.findById(id).orElseThrow(() -> new PlayerNotFoundException("Player with id "+id+" not found"));
+        playerRepository.findById(id)
+                .orElseThrow(() -> new PlayerNotFoundException("Player with id " + id + " not found"));
 
         playerRepository.deleteById(id);
 
@@ -44,7 +39,7 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public Player getById(final UUID player_id) {
         return playerRepository.findById(player_id)
-                .orElseThrow(() -> new PlayerNotFoundException("Player with id "+player_id+" not found"));
+                .orElseThrow(() -> new PlayerNotFoundException("Player with id " + player_id + " not found"));
     }
 
 }
