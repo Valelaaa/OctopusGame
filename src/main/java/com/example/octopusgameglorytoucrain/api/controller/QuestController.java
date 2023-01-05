@@ -5,7 +5,6 @@ import com.example.octopusgameglorytoucrain.entity.dto.QuestDto;
 import com.example.octopusgameglorytoucrain.mapper.Mapper;
 import com.example.octopusgameglorytoucrain.mapper.QuestMapper;
 import com.example.octopusgameglorytoucrain.service.QuestService;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;
@@ -33,7 +32,7 @@ public class QuestController {
         quest.setIsActive(true);
         quest.setAddedAt(LocalDate.now());
         QuestDto returnValue = questMapper.mapTo(questService.save(quest));
-        log.info(""+returnValue);
+        log.info("" + returnValue);
         return returnValue;
     }
 
@@ -52,7 +51,7 @@ public class QuestController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{questId}")
-    public QuestDto deleteQuestById(@PathVariable (name="questId") final UUID id) {
+    public QuestDto deleteQuestById(@PathVariable(name = "questId") final UUID id) {
         return questMapper.mapTo(questService.deleteById(id));
     }
 
